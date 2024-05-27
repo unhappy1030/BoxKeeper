@@ -20,8 +20,8 @@ public class GameStartScreen {
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.NORTH; // 최상단 배치
         JPanel panel = new JPanel(new GridBagLayout());
-        panel.setOpaque(false); // 패널 투명하게 설정
-
+//        panel.setOpaque(false); // 패널 투명하게 설정
+        panel.setBackground(Color.WHITE);
 
         // JLabel 제목 텍스트 설정
         // 배경으로 사용할 GIF 로드
