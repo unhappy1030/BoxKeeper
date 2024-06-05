@@ -1,7 +1,6 @@
-package BoxKeeper;
+package Example;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,9 +8,9 @@ import java.awt.event.ActionListener;
 public class GameStartScreen {
     public static void main(String[] args) {
         GameStartScreen test = new GameStartScreen();
-        test.startMenu();
+        test.startFrame();
     }
-    public void startMenu(){
+    public void startFrame(){
         // JFrame 생성
         JFrame frame = new JFrame("Game Start Screen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
