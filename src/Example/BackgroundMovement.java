@@ -1,4 +1,4 @@
-package BoxKeeper;
+package Example;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,9 +28,9 @@ public class BackgroundMovement extends JPanel implements KeyListener, ActionLis
         // 배경 이미지 로드
         backgroundImage = new ImageIcon("Images/Background/resize/country-platform-back.png").getImage();
         // 플레이어 이미지 로드
-        playerImage = new ImageIcon("Images/Player.png").getImage();
+        playerImage = new ImageIcon("Images/Player/Player.png").getImage();
         // 몬스터 이미지 로드
-        monsterImage = new ImageIcon("Images/cat.png").getImage();
+        monsterImage = new ImageIcon("Images/Player/cat.png").getImage();
 
         Timer timer = new Timer(1000 / 60, this); // 60 FPS로 애니메이션 타이머 설정
         timer.start();

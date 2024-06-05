@@ -1,4 +1,4 @@
-package BoxKeeper;
+package Example;
 
 import javax.swing.*;
 

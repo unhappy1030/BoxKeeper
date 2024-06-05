@@ -1,4 +1,4 @@
-package BoxKeeper;
+package BoxKeeper.Menu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,7 @@ public class StartMenu {
 
         initGBC();
         // 배경으로 사용할 GIF 로드
-        ImageIcon gifIcon = new ImageIcon("Images/frontRolling3.gif");
+        ImageIcon gifIcon = new ImageIcon("Images/Start/frontRolling.gif");
         JLabel gifLabel = new JLabel(gifIcon);// GridBagLayout 설정
         panel.add(gifLabel, gbc);
 
