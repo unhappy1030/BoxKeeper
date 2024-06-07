@@ -1,12 +1,14 @@
 package BoxKeeper.MainGame.Background;
 
 import BoxKeeper.MainGame.KeyInput.KeyInputManager;
+import BoxKeeper.MainGame.Background.Monster;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Front extends JPanel implements ActionListener {
     private final KeyInputManager keyInputManager;
@@ -20,7 +22,6 @@ public class Front extends JPanel implements ActionListener {
 
         // 배경 이미지 로드
         frontImage = new ImageIcon("Images/Background/resize/country-platform-tiles-example.png").getImage();
-
         Timer timer = new Timer(1000 / 144, this); // 60 FPS로 애니메이션 타이머 설정
         timer.start();
 
