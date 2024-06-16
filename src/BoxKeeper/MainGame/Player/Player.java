@@ -11,6 +11,10 @@ import java.awt.event.KeyEvent;
 public class Player extends JPanel implements ActionListener {
     private final KeyInputManager keyInputManager;
 
+    private int posX;
+    private int posY;
+    private final int speed = 4;
+
     private final Image walkRight1; // 오른쪽으로 걷는 캐릭터 이미지 1
     private final Image walkRight2; // 오른쪽으로 걷는 캐릭터 이미지 2
     private final Image walkLeft1; // 왼쪽으로 걷는 캐릭터 이미지 1
@@ -37,8 +41,10 @@ public class Player extends JPanel implements ActionListener {
         defaultRImage = new ImageIcon("Images/Player/defaultR.png").getImage();
         defaultLImage = new ImageIcon("Images/Player/defaultL.png").getImage();
 
+        posX = 200;
+        posY = 450;
         // 타이머를 설정하여 주기적으로 액션 이벤트를 발생시킵니다.
-        Timer timer = new Timer(1000 / 10, this);
+        Timer timer = new Timer(1000 / 144, this);
         timer.start();
     }
 
@@ -50,11 +56,13 @@ public class Player extends JPanel implements ActionListener {
             // 왼쪽으로 걷는 이미지를 변경합니다.
             currentLeftImageIndex = (currentLeftImageIndex == 1) ? 2 : 1;
             lastDirectionRight = false;
+            posX -= speed;
         } else if (keyInputManager.isKeyPressed(KeyEvent.VK_RIGHT)) {
             System.out.println("Player: Walking right");
             // 오른쪽으로 걷는 이미지를 변경합니다.
             currentRightImageIndex = (currentRightImageIndex == 1) ? 2 : 1;
             lastDirectionRight = true;
+            posX += speed;
         }
         repaint();
     }
@@ -67,25 +75,25 @@ public class Player extends JPanel implements ActionListener {
         if (keyInputManager.isKeyPressed(KeyEvent.VK_LEFT)) {
             // 왼쪽으로 걷는 캐릭터 이미지를 그립니다.
             if (currentLeftImageIndex == 1) {
-                g.drawImage(walkLeft1, 200, 450, this);
+                g.drawImage(walkLeft1, posX, posY, this);
             } else {
-                g.drawImage(walkLeft2, 200, 450, this);
+                g.drawImage(walkLeft2, posX, posY, this);
             }
         } else if (keyInputManager.isKeyPressed(KeyEvent.VK_RIGHT)) {
             // 오른쪽으로 걷는 캐릭터 이미지를 그립니다.
             if (currentRightImageIndex == 1) {
-                g.drawImage(walkRight1, 200, 450, this);
+                g.drawImage(walkRight1, posX, posY, this);
             } else {
-                g.drawImage(walkRight2, 200, 450, this);
+                g.drawImage(walkRight2, posX, posY, this);
             }
         } else {
             // 이동하지 않을 때 기본 캐릭터 이미지를 그립니다.
             if (lastDirectionRight) {
-                g.drawImage(defaultRImage, 200, 450, this);
+                g.drawImage(defaultRImage, posX, posY, this);
             } else {
                 // 왼쪽으로 움직였을 때 기본 캐릭터 이미지를 그립니다.
                 // 이미지가 없다면 마지막으로 그린 방향의 이미지를 사용할 수도 있습니다.
-                g.drawImage(defaultLImage, 200, 450, this);
+                g.drawImage(defaultLImage, posX, posY, this);
             }
         }
     }
