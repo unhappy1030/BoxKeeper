@@ -13,7 +13,7 @@ public class Player extends JPanel implements ActionListener {
 
     private int posX;
     private int posY;
-    private final int speed = 4;
+    private final int speed = 10;
 
     private final Image walkRight1; // 오른쪽으로 걷는 캐릭터 이미지 1
     private final Image walkRight2; // 오른쪽으로 걷는 캐릭터 이미지 2
@@ -44,7 +44,7 @@ public class Player extends JPanel implements ActionListener {
         posX = 200;
         posY = 450;
         // 타이머를 설정하여 주기적으로 액션 이벤트를 발생시킵니다.
-        Timer timer = new Timer(1000 / 144, this);
+        Timer timer = new Timer(1000 / 10, this);
         timer.start();
     }
 
@@ -52,17 +52,13 @@ public class Player extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // 방향키에 따라 캐릭터의 모션을 표현합니다.
         if (keyInputManager.isKeyPressed(KeyEvent.VK_LEFT)) {
-            System.out.println("Player: Walking left");
             // 왼쪽으로 걷는 이미지를 변경합니다.
             currentLeftImageIndex = (currentLeftImageIndex == 1) ? 2 : 1;
             lastDirectionRight = false;
-            posX -= speed;
         } else if (keyInputManager.isKeyPressed(KeyEvent.VK_RIGHT)) {
-            System.out.println("Player: Walking right");
             // 오른쪽으로 걷는 이미지를 변경합니다.
             currentRightImageIndex = (currentRightImageIndex == 1) ? 2 : 1;
             lastDirectionRight = true;
-            posX += speed;
         }
         repaint();
     }
@@ -98,7 +94,5 @@ public class Player extends JPanel implements ActionListener {
         }
     }
 
-    public void update(){
-        actionPerformed(null);
-    }
+    public int getPosX() {return posX;}
 }
