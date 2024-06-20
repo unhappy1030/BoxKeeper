@@ -17,8 +17,12 @@ public class Monster extends JPanel implements ActionListener{
 
     private final Image[] rightImages;
     private final Image[] leftImages;
+    private final Image[] attackLeftImages;
+    private final Image[] attackRightImages;
     private int currentImageIndex;
+    private int attackImageIndex;
     private boolean movingRight;
+    private boolean isAttack;
 
     public Monster(KeyInputManager keyInputManager){
         this.keyInputManager = keyInputManager;
@@ -28,15 +32,23 @@ public class Monster extends JPanel implements ActionListener{
         rightImages = new Image[4];
         leftImages = new Image[4];
 
+        attackRightImages = new Image[8];
+        attackLeftImages = new Image[8];
+
         for (int i = 0; i < 4; i++) {
             rightImages[i] = new ImageIcon("Images/Monster/walk/right" + (i+1) + ".png").getImage();
             leftImages[i] = new ImageIcon("Images/Monster/walk/left" + (i+1) + ".png").getImage();
+        }
+        for (int i = 0; i < 8; i++){
+            attackRightImages[i] = new ImageIcon("Images/Monster/attack/attackR" + (i+1) + ".png").getImage();
+            attackLeftImages[i] = new ImageIcon("Images/Monster/attack/attackL" + (i+1) + ".png").getImage();
         }
 
         random = new Random();
         speed = 5;
         currentImageIndex = 0;
         movingRight = random.nextBoolean();
+        isAttack = false;
 
         if (movingRight) {
             this.position = -rightImages[0].getWidth(null);
@@ -52,9 +64,16 @@ public class Monster extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
-        position += direction * speed;
-        if(speed != 0){
-            currentImageIndex = (currentImageIndex + 1) % 4;
+        if(isAttack){
+            attackImageIndex = (attackImageIndex + 1) % 8;
+            if(attackImageIndex == 0){
+                isAttack = false;
+            }
+        }else{
+            position += direction * speed;
+            if(speed != 0){
+                currentImageIndex = (currentImageIndex + 1) % 4;
+            }
         }
         repaint();
     }
@@ -64,9 +83,19 @@ public class Monster extends JPanel implements ActionListener{
         super.paintComponent(g);
         Image currentImage;
         if (movingRight) {
-            currentImage = rightImages[currentImageIndex];
+            if(isAttack){
+                currentImage = attackRightImages[attackImageIndex];
+            }
+            else{
+                currentImage = rightImages[currentImageIndex];
+            }
         } else {
-            currentImage = leftImages[currentImageIndex];
+            if(isAttack){
+                currentImage = attackLeftImages[attackImageIndex];
+            }
+            else{
+                currentImage = leftImages[currentImageIndex];
+            }
         }
         g.drawImage(currentImage, position, 275, this);
 //        System.out.println("Monster X :" + position);
@@ -88,5 +117,9 @@ public class Monster extends JPanel implements ActionListener{
     public int getPosition(){return position;}
     public int getCenter(){
         return position + 175;
+    }
+
+    public void attack(){
+        isAttack = true;
     }
 }
