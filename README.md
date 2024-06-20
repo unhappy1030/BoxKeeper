@@ -52,11 +52,11 @@ This codebase sets up a basic structure for a 2D platformer game engine, where u
 
 
 ## UML Diagram
-<img src='https://github.com/unhappy1030/22100597_LHW_DS/blob/main/CodingTest/result/DS104.png'>
+<img src='https://github.com/unhappy1030/BoxKeeper/blob/dev/Images/readme/UML_Diagram.png'>
 
 
 ## Component Diagram
-<img src='https://github.com/unhappy1030/22100597_LHW_DS/blob/main/CodingTest/result/DS104.png'>
+<img src='https://github.com/unhappy1030/BoxKeeper/blob/dev/Images/readme/Component_Diagram.png'>
 
 
 ### BoxKeeper Game User Guide
