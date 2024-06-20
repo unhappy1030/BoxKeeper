@@ -24,11 +24,9 @@ public class Front extends JPanel implements ActionListener{
 
         this.setPreferredSize(new Dimension(1000, 600));
 
-        // 배경 이미지 로드
         frontImage = new ImageIcon("Images/Background/resize/country-platform-tiles-example.png").getImage();
         int width = frontImage.getWidth(this);
 
-        // 최대 이동 범위 설정
         maxBgX = width * (numImages - 1);
 
         Timer timer = new Timer(1000/144, this);

@@ -10,15 +10,15 @@ import java.awt.event.KeyEvent;
 
 public class Back extends JPanel implements ActionListener {
     private final KeyInputManager keyInputManager;
-    private double bgX = 0; // 배경의 초기 x 위치
-    private final double speed = 0.2; // 배경 이동 속도
-    private final Image backgroundImage; // 배경 이미지
+    private double bgX = 0;
+    private final double speed = 0.2;
+    private final Image backgroundImage;
 
     public Back(KeyInputManager keyInputManager) {
         this.keyInputManager = keyInputManager;
         this.setPreferredSize(new Dimension(1000, 600));
 
-        // 배경 이미지 로드
+
         backgroundImage = new ImageIcon("Images/Background/resize/country-platform-back.png").getImage();
 
         Timer timer = new Timer(1000 / 144, this); // 60 FPS로 애니메이션 타이머 설정
@@ -28,9 +28,7 @@ public class Back extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // 배경 그리기
         if (backgroundImage != null) {
-            // 배경을 반복해서 그리기
             int width = backgroundImage.getWidth(this);
             int height = backgroundImage.getHeight(this);
 
@@ -51,6 +49,6 @@ public class Back extends JPanel implements ActionListener {
         if (keyInputManager.isKeyPressed(KeyEvent.VK_RIGHT)) {
             bgX -= speed;
         }
-        repaint(); // 화면을 다시 그립니다.
+        repaint();
     }
 }
