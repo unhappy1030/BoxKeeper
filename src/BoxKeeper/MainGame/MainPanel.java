@@ -12,15 +12,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MainPanel {
+public class MainPanel{
     private final JLayeredPane layeredPane;
 
     private final KeyInputManager keyInputManager;
-//    private final Timer timer;
 
     private final Player player;
     private final Back back;
     private final Front front;
+
     private ArrayList<Monster> monsters;
 
     public MainPanel(KeyInputManager keyInputManager){
@@ -38,7 +38,7 @@ public class MainPanel {
         front.setOpaque(false);
 
         player = new Player(keyInputManager);
-        player.setBounds(0, 0, 1000, 600); // Set the bounds for the player
+        player.setBounds(0, 0, 1000, 600);
         player.setOpaque(false);
 
         monsters = new ArrayList<>();
@@ -49,13 +49,19 @@ public class MainPanel {
             monster.setOpaque(false);
             layeredPane.add(monster, Integer.valueOf(3));
         }
+        InteractionManager.setPlayer(player);
+        InteractionManager.setFront(front);
+        InteractionManager.setMonsters(monsters);
 
         layeredPane.add(back, Integer.valueOf(0));
         layeredPane.add(front, Integer.valueOf(1));
         layeredPane.add(player, Integer.valueOf(2));
+
     }
 
     public JLayeredPane getLayeredPane(){
         return layeredPane;
     }
+
+
 }

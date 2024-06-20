@@ -8,65 +8,85 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class Monster extends JPanel implements ActionListener {
+public class Monster extends JPanel implements ActionListener{
     private final KeyInputManager keyInputManager;
     private int position;
     private int speed;
     private int direction;
     private final Random random;
 
-    private final Image monsterImage;
+    private final Image[] rightImages;
+    private final Image[] leftImages;
+    private int currentImageIndex;
+    private boolean movingRight;
 
     public Monster(KeyInputManager keyInputManager){
         this.keyInputManager = keyInputManager;
         setPreferredSize(new Dimension(64,64));
-        this.monsterImage = new ImageIcon("Images/Player/defaultL.png").getImage();
-        random = new Random();
 
-        speed = 2;
-        direction = 1;
+        // Load images
+        rightImages = new Image[4];
+        leftImages = new Image[4];
 
-        // 몬스터가 화면 밖에서 생성되도록 설정
-        if (random.nextBoolean()) {
-            // 왼쪽 밖에서 생성
-            this.position = -monsterImage.getWidth(null);
-            this.direction = 1; // 오른쪽으로 이동
-        } else {
-            // 오른쪽 밖에서 생성
-            this.position = 1000;
-            this.direction = -1; // 왼쪽으로 이동
+        for (int i = 0; i < 4; i++) {
+            rightImages[i] = new ImageIcon("Images/Monster/walk/right" + (i+1) + ".png").getImage();
+            leftImages[i] = new ImageIcon("Images/Monster/walk/left" + (i+1) + ".png").getImage();
         }
 
-        Timer timer = new Timer(1000 / 10, this);
+        random = new Random();
+        speed = 5;
+        currentImageIndex = 0;
+        movingRight = random.nextBoolean();
+
+        if (movingRight) {
+            this.position = -rightImages[0].getWidth(null);
+            direction = 1;
+        } else {
+            this.position = 1000;
+            direction = -1;
+        }
+
+        Timer timer = new Timer(1000/10, this);
         timer.start();
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        int dir = random.nextInt(100);
-        if (dir < 20) { // 20% 확률로 방향 변경
-            direction = -1;
-        }
-        else if(dir < 60){
-            direction = 0;
-        }
-        else{
-            direction = 1;
-        }
-
-        // 이동
+    public void actionPerformed(ActionEvent e){
         position += direction * speed;
+        if(speed != 0){
+            currentImageIndex = (currentImageIndex + 1) % 4;
+        }
         repaint();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        g.drawImage(monsterImage, position, 450, this);
+        Image currentImage;
+        if (movingRight) {
+            currentImage = rightImages[currentImageIndex];
+        } else {
+            currentImage = leftImages[currentImageIndex];
+        }
+        g.drawImage(currentImage, position, 275, this);
+//        System.out.println("Monster X :" + position);
     }
 
-    public void update(){
-        actionPerformed(null);
+    public void setDirection(boolean dir){
+        direction = dir ? 1 : -1;
+        movingRight = dir;
+    }
+
+    public void move(int value){
+        position += value;
+    }
+
+    public void setSpeed(int speed){
+        this.speed = speed;
+    }
+
+    public int getPosition(){return position;}
+    public int getCenter(){
+        return position + 175;
     }
 }
