@@ -44,15 +44,15 @@ public class MainPanel{
         monsters = new ArrayList<>();
         monsters.add(new Monster(keyInputManager));
 
-        InteractionManager.setPlayer(player);
-        InteractionManager.setFront(front);
-        InteractionManager.setMonsters(monsters);
-
         for(Monster monster : monsters){
             monster.setBounds(0, 0, 1000, 600);
             monster.setOpaque(false);
             layeredPane.add(monster, Integer.valueOf(3));
         }
+        InteractionManager.setPlayer(player);
+        InteractionManager.setFront(front);
+        InteractionManager.setMonsters(monsters);
+
         layeredPane.add(back, Integer.valueOf(0));
         layeredPane.add(front, Integer.valueOf(1));
         layeredPane.add(player, Integer.valueOf(2));

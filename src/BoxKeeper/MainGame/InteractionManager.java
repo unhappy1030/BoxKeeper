@@ -3,7 +3,6 @@ package BoxKeeper.MainGame;
 import BoxKeeper.MainGame.Background.Front;
 import BoxKeeper.MainGame.Background.Monster;
 import BoxKeeper.MainGame.Player.Player;
-import java.awt.*;
 import java.util.ArrayList;
 
 public class InteractionManager {
@@ -23,11 +22,18 @@ public class InteractionManager {
     }
     public static void setMonsterDir(){
         for(Monster monster : monsters){
-            if(monster.getPosition() < player.getPosX()){
+            System.out.println("Player/Monster : " + player.getPosX() + "/" + monster.getPosition());
+            if(monster.getCenter() < player.getCenter()){
                 monster.setDirection(true);
-            }
-            else {
+            } else {
                 monster.setDirection(false);
+            }
+
+            if(monster.getCenter() + 100 >= player.getCenter() && monster.getCenter() - 100 <= player.getCenter()) {
+                monster.setSpeed(0);
+            }
+            else{
+                monster.setSpeed(5);
             }
         }
     }

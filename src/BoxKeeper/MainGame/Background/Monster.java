@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class Monster extends JPanel implements ActionListener {
+public class Monster extends JPanel implements ActionListener{
     private final KeyInputManager keyInputManager;
     private int position;
     private int speed;
@@ -38,7 +38,6 @@ public class Monster extends JPanel implements ActionListener {
         currentImageIndex = 0;
         movingRight = random.nextBoolean();
 
-        // Set initial position and direction
         if (movingRight) {
             this.position = -rightImages[0].getWidth(null);
             direction = 1;
@@ -47,14 +46,16 @@ public class Monster extends JPanel implements ActionListener {
             direction = -1;
         }
 
-        Timer timer = new Timer(1000 / 10, this);
+        Timer timer = new Timer(1000/10, this);
         timer.start();
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e){
         position += direction * speed;
-        currentImageIndex = (currentImageIndex + 1) % 4; // Cycle through the images
+        if(speed != 0){
+            currentImageIndex = (currentImageIndex + 1) % 4;
+        }
         repaint();
     }
 
@@ -68,7 +69,7 @@ public class Monster extends JPanel implements ActionListener {
             currentImage = leftImages[currentImageIndex];
         }
         g.drawImage(currentImage, position, 275, this);
-        System.out.println("Monster X :" + position);
+//        System.out.println("Monster X :" + position);
     }
 
     public void setDirection(boolean dir){
@@ -80,5 +81,12 @@ public class Monster extends JPanel implements ActionListener {
         position += value;
     }
 
+    public void setSpeed(int speed){
+        this.speed = speed;
+    }
+
     public int getPosition(){return position;}
+    public int getCenter(){
+        return position + 175;
+    }
 }
