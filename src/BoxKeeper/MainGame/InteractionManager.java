@@ -31,6 +31,7 @@ public class InteractionManager {
 
             if(monster.getCenter() + 100 >= player.getCenter() && monster.getCenter() - 100 <= player.getCenter()) {
                 monster.setSpeed(0);
+                monster.attack();
             }
             else{
                 monster.setSpeed(5);
